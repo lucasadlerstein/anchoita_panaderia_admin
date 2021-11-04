@@ -1,0 +1,61 @@
+{
+  "name": "react-material-dashboard",
+  "author": "DeviasIO",
+  "email": "contact@devias.io",
+  "licence": "MIT",
+  "version": "0.3.0",
+  "private": true,
+  "scripts": {
+    "start": "set PORT=3070 && react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.2.1",
+    "@material-ui/icons": "^4.2.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
+    "@material-ui/styles": "^4.2.1",
+    "axios": "^0.21.1",
+    "chart.js": "^2.8.0",
+    "clsx": "^1.0.4",
+    "history": "^4.9.0",
+    "js-file-download": "^0.4.12",
+    "material-ui-dropzone": "^3.3.0",
+    "moment": "^2.24.0",
+    "node-sass": "^4.12.0",
+    "pm2": "^4.5.5",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-chartjs-2": "^2.7.6",
+    "react-dom": "^16.8.6",
+    "react-perfect-scrollbar": "^1.5.3",
+    "react-router-dom": "^5.0.1",
+    "react-scripts": "^3.4.4",
+    "recompose": "^0.30.0",
+    "sweetalert2": "^9.17.0",
+    "sweetalert2-react-content": "^3.0.3",
+    "underscore": "^1.9.1",
+    "uuid": "^3.3.2",
+    "validate.js": "^0.13.1"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "prettier": "^1.17.1",
+    "prettier-eslint": "^8.8.2",
+    "prettier-eslint-cli": "^4.7.1",
+    "typescript": "^3.5.1"
+  }
+}
