@@ -165,7 +165,7 @@ const Platos = () => {
         console.log('DBERROR');
       }
     }
-    traerItems();
+    // traerItems();
   }, [])
 
   const ConfirmacionSwal = withReactContent(Swal)

@@ -166,7 +166,7 @@ const VinosOcultos = () => {
         console.log('DBERROR');
       }
     }
-    traerVinos();
+    // traerVinos();
   }, [])
 
   const ConfirmacionSwal = withReactContent(Swal)

@@ -155,7 +155,7 @@ const Vinos = () => {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(50);
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(['1']);
 
   useEffect(() => {
     async function traerVinos() {
@@ -166,7 +166,7 @@ const Vinos = () => {
         console.log('DBERROR');
       }
     }
-    traerVinos();
+    // traerVinos();
   }, [])
 
   const ConfirmacionSwal = withReactContent(Swal)

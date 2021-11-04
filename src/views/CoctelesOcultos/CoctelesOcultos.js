@@ -160,7 +160,7 @@ const CoctelesOcultos = () => {
         console.log('DBERROR');
       }
     }
-    traerItems();
+    // traerItems();
   }, [])
 
   const ConfirmacionSwal = withReactContent(Swal)
