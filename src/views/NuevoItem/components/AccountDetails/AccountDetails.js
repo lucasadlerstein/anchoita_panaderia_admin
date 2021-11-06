@@ -44,7 +44,7 @@ const AccountDetails = props => {
       setIdEditando(id);
       async function cargarDatosEditar() {
         try {
-          const consulta = await clienteAxios.get(`/platos/uno/${id}`);
+          const consulta = await clienteAxios.get(`/panaderia/uno/${id}`);
           setValues(consulta.data.plato);
         } catch (error) {
           console.log(error);
@@ -54,6 +54,18 @@ const AccountDetails = props => {
     } else {
       setEditando(false);
     }
+
+    async function traerCategoriasCafe() {
+      await clienteAxios.get('/general/get/categorias-cafe')
+        .then(resp => {
+          setCategoriasCafe(resp.data.categoriasCafe)
+          console.log(resp.data.categoriasCafe)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+    traerCategoriasCafe()
     // eslint-disable-next-line
   }, [])
 
@@ -73,12 +85,16 @@ const AccountDetails = props => {
 
   const [errores, setErrores] = useState(null);
   const [editando, setEditando] = useState(false);
+  const [categoriasCafe, setCategoriasCafe] = useState([]);
   const [idEditando, setIdEditando] = useState(null);
   const [values, setValues] = useState({
     nombre: '',
     descripcion: '',
     precio: '',
-    categoria: 1,
+    precio2: '',
+    precio3: '',
+    categoria: 3,
+    categoria2: '',
     en_nombre: '',
     en_descripcion: '',
     stock: true,
@@ -103,7 +119,7 @@ const AccountDetails = props => {
     if(editando) {
       // editando
       try {
-        const post = await clienteAxios.put(`/platos/editar/${idEditando}`, values);
+        const post = await clienteAxios.put(`/panaderia/editar/${idEditando}`, values);
         mensajeSwal.fire({
           title: '¡Excelente!',
           text: `El item fue editado exitosamente`,
@@ -124,7 +140,7 @@ const AccountDetails = props => {
     } else {
       // creando nuevo
       try {
-        const post = await clienteAxios.post('/platos', values);
+        const post = await clienteAxios.post('/panaderia', values);
         mensajeSwal.fire({
           title: '¡Excelente!',
           text: `El item fue agregado con éxito`,
@@ -295,9 +311,13 @@ const AccountDetails = props => {
                     >
                     <option value={null} disabled selected>- Seleccionar -</option>
                     {
-                      tiposCafe.map(cat => (
-                        <option key={cat.codigo} value={cat.codigo}>{cat.nombre}</option>
-                      ))
+                      categoriasCafe.map(cat => {
+                        if(cat.nombre !== null && cat.nombre !== '') {
+                          return (
+                            <option key={cat.id} value={cat.id}>{cat.nombre}</option>
+                          )
+                        }
+                      })
                     }
                   </TextField>
                   ) : null

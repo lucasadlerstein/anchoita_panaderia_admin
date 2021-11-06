@@ -57,11 +57,11 @@ function stableSort(array, comparator) {
 
 const headCells = [
   { id: 'nombre', numeric: false, disablePadding: true, label: 'Nombre' },
-  { id: 'anada', numeric: false, disablePadding: false, label: 'Añada' },
-  { id: 'bodega', numeric: false, disablePadding: false, label: 'Bodega' },
-  { id: 'tipo', numeric: false, disablePadding: false, label: 'Tipo' },
-  { id: 'uva', numeric: false, disablePadding: false, label: 'Uva' },
+  { id: 'categoria', numeric: true, disablePadding: false, label: 'Categoria' },
+  // { id: 'categoria2', numeric: true, disablePadding: false, label: 'Cafe' },
   { id: 'precio', numeric: true, disablePadding: false, label: 'Precio' },
+  { id: 'precio2', numeric: true, disablePadding: false, label: 'Precio 2' },
+  { id: 'precio3', numeric: true, disablePadding: false, label: 'Precio 3' },
   { id: 'acciones', numeric: false, disablePadding: false, label: 'Acciones' },
 ];
 
@@ -160,13 +160,13 @@ const VinosOcultos = () => {
   useEffect(() => {
     async function traerVinos() {
       try {
-        const vinosConsulta = await clienteAxios.get('/general/ocultos/totales');
-        setItems(vinosConsulta.data.ocultosVinos);
+        const vinosConsulta = await clienteAxios.get('/panaderia/ocultos/todos');
+        setItems(vinosConsulta.data.items)
       } catch (error) {
         console.log('DBERROR');
       }
     }
-    // traerVinos();
+    traerVinos();
   }, [])
 
   const ConfirmacionSwal = withReactContent(Swal)
@@ -184,7 +184,7 @@ const VinosOcultos = () => {
     }).then( async (result)  => {
       if(result.value){
         try {
-          const resEliminar = await clienteAxios.delete(`/vinos/${id}`);  
+          const resEliminar = await clienteAxios.delete(`/panaderia/eliminar/${id}`);  
           ConfirmacionSwal.fire({
             title: 'Eliminado con éxito',
             text: "Listo, ya lo eliminaste",
@@ -333,12 +333,12 @@ const VinosOcultos = () => {
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   if (
-                    (busqueda === null || busqueda === '') || (
+                    (item.visible === false && (item.categoria === 1 || item.categoria === 2)) &&
+                    ((busqueda === null || busqueda === '') || (
                     (busqueda !== null || busqueda !== '') && (
-                      item.nombre.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(busqueda.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase()) ||
-                      item.tipo.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(busqueda.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase()) ||
-                      item.uva.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(busqueda.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase()) ||
-                      item.bodega.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(busqueda.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase())))) {
+                      item.categoria.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(busqueda.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase()) ||
+                      item.en_nombre.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(busqueda.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase()) ||
+                      item.nombre.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(busqueda.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase()))))) {
 
                   return (
                     <TableRow
@@ -356,14 +356,12 @@ const VinosOcultos = () => {
                           inputProps={{ 'aria-labelledby': labelId }}
                         /> */}
                       </TableCell>
-                      <TableCell component="th" id={labelId} scope="row" padding="none">
-                        {item.nombre}
-                      </TableCell>
-                      <TableCell align="left">{item.anada}</TableCell>
-                      <TableCell align="left">{item.bodega}</TableCell>
-                      <TableCell align="left">{item.tipo}</TableCell>
-                      <TableCell align="left">{item.uva}</TableCell>
-                      <TableCell align="right">${item.precio}</TableCell>
+                      <TableCell component="th" id={labelId} scope="row" padding="none">{item.nombre}</TableCell>
+                      <TableCell align="right">{item.categoria === 1 ? 'Cafeteria' : 'Otro'}</TableCell>
+                      {/* <TableCell align="right">{item.categoria2}</TableCell> */}
+                      <TableCell align="right">{(item.precio !== 0) ? `$${item.precio}` : ''}</TableCell>
+                      <TableCell align="right">{(item.precio2 !== 0) ? `$${item.precio2}` : ''}</TableCell>
+                      <TableCell align="right">{(item.precio3 !== 0) ? `$${item.precio3}` : ''}</TableCell>
                       <TableCell align="right">
                         <IconButton
                           onClick={() => eliminarBtn(item.id)}

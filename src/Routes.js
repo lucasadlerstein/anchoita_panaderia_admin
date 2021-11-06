@@ -54,12 +54,12 @@ const Routes = () => {
         layout={MainLayout}
         path="/bebida-oculta"
       />
-      <RouteWithLayout
+      {/* <RouteWithLayout
         component={CoctelesOcultosView}
         exact
         layout={MainLayout}
         path="/cocteles-ocultos"
-      />
+      /> */}
       <RouteWithLayout
         component={PlatosOcultosView}
         exact
@@ -78,12 +78,12 @@ const Routes = () => {
         layout={MainLayout}
         path="/bebidas"
       />
-      <RouteWithLayout
+      {/* <RouteWithLayout
         component={CoctelesView}
         exact
         layout={MainLayout}
         path="/cocteles"
-      />
+      /> */}
       <RouteWithLayout
         component={NuevoItemView}
         exact

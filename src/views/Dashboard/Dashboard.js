@@ -48,7 +48,7 @@ const Dashboard = () => {
           xl={3}
           xs={12}
         >
-          <Budget inscriptosNewsletter={estadisticas.totalPlatos}
+          <Budget inscriptosNewsletter={estadisticas.totalComida}
             onClick={() => window.location.href = '/comida'}
             style={{cursor: 'pointer'}}
           />
@@ -60,7 +60,7 @@ const Dashboard = () => {
           xl={3}
           xs={12}
         >
-          <TasksProgress eventosTotales={estadisticas.totalCocteleria}
+          <TasksProgress eventosTotales={estadisticas.totalBebida}
             onClick={() => window.location.href = '/bebidas'}
             style={{cursor: 'pointer'}}
           />
@@ -90,7 +90,7 @@ const Dashboard = () => {
         >
           <Reutilizable
             texto={"COMIDAS OCULTAS"}
-            numero={estadisticas.totalPlatosOcultos}
+            numero={estadisticas.totalComidaOcultos}
             onClick={() => window.location.href = '/comidas-ocultos'}
             style={{cursor: 'pointer'}}
           />
@@ -104,7 +104,7 @@ const Dashboard = () => {
         >
           <Reutilizable
             texto={"BEBIDAS OCULTAS"}
-            numero={estadisticas.totalVinosOcultos}
+            numero={estadisticas.totalBebidaOcultos}
             onClick={() => window.location.href = '/bebidas-ocultas'}
             style={{cursor: 'pointer'}}
           />

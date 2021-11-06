@@ -57,11 +57,11 @@ function stableSort(array, comparator) {
 
 const headCells = [
   { id: 'nombre', numeric: false, disablePadding: true, label: 'Nombre' },
-  { id: 'descripcion', numeric: false, disablePadding: false, label: 'Descripción' },
   { id: 'categoria', numeric: false, disablePadding: false, label: 'Categoría' },
-  { id: 'checks', numeric: false, disablePadding: false, label: 'Checks' },
   { id: 'precio', numeric: true, disablePadding: false, label: 'Precio' },
-  { id: 'acciones', numeric: false, disablePadding: false, label: 'Acciones' },
+  { id: 'precio2', numeric: true, disablePadding: false, label: 'Precio2' },
+  { id: 'precio3', numeric: true, disablePadding: false, label: 'Precio3' },
+  { id: 'acciones', numeric: true, disablePadding: false, label: 'Acciones' },
 ];
 
 function EnhancedTableHead(props) {
@@ -159,13 +159,13 @@ const Platos = () => {
   useEffect(() => {
     async function traerItems() {
       try {
-        const consulta = await clienteAxios.get('/platos/todos');
-        setItems(consulta.data.platos);
+        const consulta = await clienteAxios.get('/panaderia/todos');
+        setItems(consulta.data.items);
       } catch (error) {
         console.log('DBERROR');
       }
     }
-    // traerItems();
+    traerItems();
   }, [])
 
   const ConfirmacionSwal = withReactContent(Swal)
@@ -183,7 +183,7 @@ const Platos = () => {
     }).then( async (result)  => {
       if(result.value){
         try {
-          const resEliminar = await clienteAxios.delete(`/platos/${id}`);  
+          const resEliminar = await clienteAxios.delete(`/panaderia/eliminar/${id}`);  
           ConfirmacionSwal.fire({
             title: 'Eliminado con éxito',
             text: "Listo, ya lo eliminaste",
@@ -329,11 +329,11 @@ const Platos = () => {
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   if (
-                    (busqueda === null || busqueda === '') || (
+                    (item.categoria === 3 || item.categoria === 4 || item.categoria === 5) &&
+                    ((busqueda === null || busqueda === '') || (
                     (busqueda !== null || busqueda !== '') && (
                       item.nombre.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(busqueda.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase()) ||
-                      item.descripcion.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(busqueda.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase()) ||
-                      item.categoria.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(busqueda.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase())))) {
+                      item.descripcion.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(busqueda.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase()))))) {
                   return (
                     <TableRow
                       hover
@@ -350,18 +350,12 @@ const Platos = () => {
                           inputProps={{ 'aria-labelledby': labelId }}
                         /> */}
                       </TableCell>
-                      <TableCell component="th" id={labelId} scope="row" padding="none">
-                        {item.nombre}
-                      </TableCell>
-                      <TableCell align="left">{item.descripcion}</TableCell>
-                      <TableCell align="left">{item.categoria.charAt(0).toUpperCase() + item.categoria.slice(1)}</TableCell>
-                      <TableCell align="left">
-                        { (item.vegano) ? 'V' : (item.vegetariano) ? 'v' : null }
-                        { (item.celiaco) ? 'C' : null }
-                        { (item.picante) ? 'P' : null }
-                        { (item.destacado) ? 'D' : null }
-                      </TableCell>
-                      <TableCell align="right">${item.precio}</TableCell>
+                      <TableCell component="th" id={labelId} scope="row" padding="none">{item.nombre}</TableCell>
+                      <TableCell align="right">{item.categoria === 1 ? 'Cafeteria' : 'Otro'}</TableCell>
+                      {/* <TableCell align="right">{item.categoria2}</TableCell> */}
+                      <TableCell align="right">{(item.precio !== 0) ? `$${item.precio}` : ''}</TableCell>
+                      <TableCell align="right">{(item.precio2 !== 0) ? `$${item.precio2}` : ''}</TableCell>
+                      <TableCell align="right">{(item.precio3 !== 0) ? `$${item.precio3}` : ''}</TableCell>
                       <TableCell align="right">
                         <IconButton
                           onClick={() => eliminarBtn(item.id)}

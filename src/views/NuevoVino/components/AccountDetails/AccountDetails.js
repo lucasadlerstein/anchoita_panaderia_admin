@@ -33,56 +33,129 @@ const AccountDetails = props => {
 
   useEffect(() => {
 
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const id = urlParams.get('id');
-
-    if(id !== null) {
-      setEditando(true);
-      setIdEditando(id);
-      async function cargarDatosEditar() {
-        try {
-          const wino = await clienteAxios.get(`/vinos/uno/${id}`);
-          setValues(wino.data.vino);
-        } catch (error) {
-          console.log(error);
+    async function cargarDatosEditar() {
+      try {
+        const wino = await clienteAxios.get(`/general/get/categorias-cafe`);
+        const categoriasCafe = wino.data.categoriasCafe;
+        console.log(categoriasCafe);
+        const objetoMio = {
+          nombre01: '',
+          en_nombre01: '',
+          nombre02: '',
+          en_nombre02: '',
+          nombre03: '',
+          en_nombre03: '',
+          nombre04: '',
+          en_nombre04: '',
+          nombre05: '',
+          en_nombre05: '',
+          nombre06: '',
+          en_nombre06: '',
+          nombre07: '',
+          en_nombre07: '',
+          nombre08: '',
+          en_nombre08: '',
+          nombre09: '',
+          en_nombre09: '',
+          nombre10: '',
+          en_nombre10: ''
         }
+        categoriasCafe.map((elemento)  => {
+          switch(Number(elemento.id)) {
+            case 1:
+              objetoMio.nombre01 = elemento.nombre;
+              objetoMio.en_nombre01 = elemento.en_nombre
+
+            break;
+
+
+            case 2:
+              objetoMio.nombre02 = elemento.nombre;
+              objetoMio.en_nombre02 = elemento.en_nombre
+
+            break;
+
+            case 3:
+              objetoMio.nombre03 = elemento.nombre;
+              objetoMio.en_nombre03 = elemento.en_nombre
+            break;
+
+            case 4:
+              objetoMio.nombre04 = elemento.nombre;
+              objetoMio.en_nombre04 = elemento.en_nombre
+            break;
+
+            case 5:
+              objetoMio.nombre05 = elemento.nombre;
+              objetoMio.en_nombre05 = elemento.en_nombre
+
+            break;
+
+            case 6:
+              objetoMio.nombre06 = elemento.nombre;
+              objetoMio.en_nombre06 = elemento.en_nombre
+            break;
+
+            case 7:
+              objetoMio.nombre07 = elemento.nombre;
+              objetoMio.en_nombre07 = elemento.en_nombre
+            break;
+
+            case 8:
+              objetoMio.nombre08 = elemento.nombre;
+              objetoMio.en_nombre08 = elemento.en_nombre
+            break;
+
+            case 9:
+              objetoMio.nombre09 = elemento.nombre;
+              objetoMio.en_nombre09 = elemento.en_nombre
+            break;
+
+            case 10:
+              objetoMio.nombre10 = elemento.nombre;
+              objetoMio.en_nombre10 = elemento.en_nombre;
+            break;
+            default:
+              break;
+          }
+        })
+        console.log(objetoMio)
+        setValues(objetoMio);
+        // setValues(wino.data.categoiasCafe);
+      } catch (error) {
+        console.log(error);
       }
-      cargarDatosEditar();
-    } else {
-      setEditando(false);
     }
+    cargarDatosEditar();
     // eslint-disable-next-line
   }, [])
 
   const [errores, setErrores] = useState(null);
   const [editando, setEditando] = useState(false);
   const [idEditando, setIdEditando] = useState(null);
-  const [values, setValues] = useState({
-    heladoVaso: '',
-    heladoCucurucho: '',
-    heladoCuarto: '',
-    nombre01: '',
-    en_nombre01: '',
-    nombre02: '',
-    en_nombre02: '',
-    nombre03: '',
-    en_nombre03: '',
-    nombre04: '',
-    en_nombre04: '',
-    nombre05: '',
-    en_nombre05: '',
-    nombre06: '',
-    en_nombre06: '',
-    nombre07: '',
-    en_nombre07: '',
-    nombre08: '',
-    en_nombre08: '',
-    nombre09: '',
-    en_nombre09: '',
-    nombre10: '',
-    en_nombre10: ''
-  });
+  const [values, setValues] = useState({})
+  // const [values, setValues] = useState({
+  //   nombre01: '',
+  //   en_nombre01: '',
+  //   nombre02: '',
+  //   en_nombre02: '',
+  //   nombre03: '',
+  //   en_nombre03: '',
+  //   nombre04: '',
+  //   en_nombre04: '',
+  //   nombre05: '',
+  //   en_nombre05: '',
+  //   nombre06: '',
+  //   en_nombre06: '',
+  //   nombre07: '',
+  //   en_nombre07: '',
+  //   nombre08: '',
+  //   en_nombre08: '',
+  //   nombre09: '',
+  //   en_nombre09: '',
+  //   nombre10: '',
+  //   en_nombre10: ''
+  // });
 
   const handleChange = event => {
     setValues({
@@ -147,63 +220,84 @@ const AccountDetails = props => {
   }
 
   const ConfirmacionSwal = withReactContent(Swal)
+  const diezItems = ['01','02','03','04','05','06','07','08','09','10'];
 
-  const btnCancelar = () => {
-    ConfirmacionSwal.fire({
-      title: '¿Seguro querés cancelar?',
-      text: `Se perderá toda la información`,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#0E3453',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Estoy seguro',
-      cancelButtonText: 'Quiero seguir'
-    }).then( async (result)  => {
-      if(result.value){
-        window.location.replace("/vinos");
-      }
-    }); 
-  }
+  async function guardarCategoria(numero, es, en) {
+    const mensajeSwal = withReactContent(Swal);
+    const info = {
+      nombre: '',
+      en_nombre: ''
+    };
+    
+    switch(Number(numero)) {
+      case 1:
+        info.nombre = values.nombre01;
+        info.en_nombre = values.en_nombre01;
+      break;
+      case 2:
+        info.nombre = values.nombre02;
+        info.en_nombre = values.en_nombre02;
+      break;
+      case 3:
+        info.nombre = values.nombre03;
+        info.en_nombre = values.en_nombre03;
+      break;
 
-  const btnVaciar = () => {
-    ConfirmacionSwal.fire({
-      title: '¿Seguro querés vaciar los campos?',
-      text: `Se perderá toda la información`,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#0E3453',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, vacialo',
-      cancelButtonText: 'Seguir editando'
-    }).then( async (result)  => {
-      if(result.value){
-        setValues({
-          heladoVaso: '',
-          heladoCucurucho: '',
-          heladoCuarto: '',
-          nombre01: '',
-          en_nombre01: '',
-          nombre02: '',
-          en_nombre02: '',
-          nombre03: '',
-          en_nombre03: '',
-          nombre04: '',
-          en_nombre04: '',
-          nombre05: '',
-          en_nombre05: '',
-          nombre06: '',
-          en_nombre06: '',
-          nombre07: '',
-          en_nombre07: '',
-          nombre08: '',
-          en_nombre08: '',
-          nombre09: '',
-          en_nombre09: '',
-          nombre10: '',
-          en_nombre10: ''
-        })
-      }
-    }); 
+      case 4:
+        info.nombre = values.nombre04;
+        info.en_nombre = values.en_nombre04;
+      break;
+
+      case 5:
+        info.nombre = values.nombre05;
+        info.en_nombre = values.en_nombre05;
+      break;
+
+      case 6:
+        info.nombre = values.nombre06;
+        info.en_nombre = values.en_nombre06;
+      break;
+
+      case 7:
+        info.nombre = values.nombre07;
+        info.en_nombre = values.en_nombre07;
+      break;
+
+      case 8:
+        info.nombre = values.nombre08;
+        info.en_nombre = values.en_nombre08;
+      break;
+
+      case 9:
+        info.nombre = values.nombre09;
+        info.en_nombre = values.en_nombre09;
+      break;
+
+      case 10:
+        info.nombre = values.nombre10;
+        info.en_nombre = values.en_nombre10;
+      break;
+      default:
+        break;
+    }
+    console.log(info);
+    await clienteAxios.put(`/general/actualizar/categorias-cafe/${numero}`, info)
+      .then(resp => {
+        mensajeSwal.fire({
+          title: 'Excelente',
+          text: `Categoría actualizada con éxito`,
+          icon: 'success',
+          timer: 3000
+        });
+      })
+      .catch(error => {
+        mensajeSwal.fire({
+          title: 'Ups...',
+          text: `Hubo un error`,
+          icon: 'error',
+          timer: 3000
+        });
+      })
   }
 
   return (
@@ -221,414 +315,63 @@ const AccountDetails = props => {
           title="CAMBIOS GENERALES"
         />
         <CardContent>
-        <Divider />
-          <CardHeader
-            subheader="Precios de helado"
-          />
-          <Grid
-            container
-            spacing={3}
-          >
-            <Grid
-                item
-                md={3}
-                xs={4}
-              >
-                <TextField
-                  fullWidth
-                  label="Precio del vasito"
-                  margin="dense"
-                  name="heladoVaso"
-                  onChange={handleChange}
-                  required
-                  type="number"
-                  value={values.heladoVaso}
-                  variant="outlined"
-                />
-              </Grid>
-              <Grid
-                item
-                md={3}
-                xs={4}
-              >
-                <TextField
-                  fullWidth
-                  label="Precio del cucurucho"
-                  margin="dense"
-                  name="heladoCucurucho"
-                  onChange={handleChange}
-                  required
-                  type="number"
-                  value={values.heladoCucurucho}
-                  variant="outlined"
-                />
-              </Grid>
-              <Grid
-                item
-                md={3}
-                xs={4}
-              >
-                <TextField
-                  fullWidth
-                  label="Precio del 1/4 kilo"
-                  margin="dense"
-                  name="heladoCuarto"
-                  onChange={handleChange}
-                  required
-                  type="number"
-                  value={values.heladoCuarto}
-                  variant="outlined"
-                />
-              </Grid>
-            </Grid>
-        <Divider style={{marginTop: '20px'}} />
         <CardHeader
           subheader="Categorías de Café"
         />
-          <Grid
-            container
-            spacing={3}
-          >
-            <Grid item md={2} xs={3}>
-              <CardHeader
-                title="Café 1"
-              />
-            </Grid>
-            <Grid item md={5} xs={5}>
-              <TextField
-                fullWidth
-                helperText="En español"
-                label="Nombre del café"
-                margin="dense"
-                name="nombre01"
-                onChange={handleChange}
-                required
-                value={values.nombre01}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item md={5} xs={4}>
-              <TextField
-                fullWidth
-                helperText="En inglés"
-                label="Nombre del café"
-                margin="dense"
-                name="en_nombre01"
-                onChange={handleChange}
-                required
-                value={values.en_nombre01}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item md={2} xs={3}>
-              <CardHeader
-                title="Café 2"
-              />
-            </Grid>
-            <Grid item md={5} xs={5}>
-              <TextField
-                fullWidth
-                helperText="En español"
-                label="Nombre del café"
-                margin="dense"
-                name="nombre02"
-                onChange={handleChange}
-                required
-                value={values.nombre02}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item md={5} xs={4}>
-              <TextField
-                fullWidth
-                helperText="En inglés"
-                label="Nombre del café"
-                margin="dense"
-                name="en_nombre02"
-                onChange={handleChange}
-                required
-                value={values.en_nombre02}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item md={2} xs={3}>
-              <CardHeader
-                title="Café 3"
-              />
-            </Grid>
-            <Grid item md={5} xs={5}>
-              <TextField
-                fullWidth
-                helperText="En español"
-                label="Nombre del café"
-                margin="dense"
-                name="nombre03"
-                onChange={handleChange}
-                required
-                value={values.nombre03}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item md={5} xs={4}>
-              <TextField
-                fullWidth
-                helperText="En inglés"
-                label="Nombre del café"
-                margin="dense"
-                name="en_nombre03"
-                onChange={handleChange}
-                required
-                value={values.en_nombre03}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item md={2} xs={3}>
-              <CardHeader
-                title="Café 4"
-              />
-            </Grid>
-            <Grid item md={5} xs={5}>
-              <TextField
-                fullWidth
-                helperText="En español"
-                label="Nombre del café"
-                margin="dense"
-                name="nombre04"
-                onChange={handleChange}
-                required
-                value={values.nombre04}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item md={5} xs={4}>
-              <TextField
-                fullWidth
-                helperText="En inglés"
-                label="Nombre del café"
-                margin="dense"
-                name="en_nombre04"
-                onChange={handleChange}
-                required
-                value={values.en_nombre04}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item md={2} xs={3}>
-              <CardHeader
-                title="Café 5"
-              />
-            </Grid>
-            <Grid item md={5} xs={5}>
-              <TextField
-                fullWidth
-                helperText="En español"
-                label="Nombre del café"
-                margin="dense"
-                name="nombre05"
-                onChange={handleChange}
-                required
-                value={values.nombre05}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item md={5} xs={4}>
-              <TextField
-                fullWidth
-                helperText="En inglés"
-                label="Nombre del café"
-                margin="dense"
-                name="en_nombre05"
-                onChange={handleChange}
-                required
-                value={values.en_nombre05}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item md={2} xs={3}>
-              <CardHeader
-                title="Café 6"
-              />
-            </Grid>
-            <Grid item md={5} xs={5}>
-              <TextField
-                fullWidth
-                helperText="En español"
-                label="Nombre del café"
-                margin="dense"
-                name="nombre06"
-                onChange={handleChange}
-                required
-                value={values.nombre06}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item md={5} xs={4}>
-              <TextField
-                fullWidth
-                helperText="En inglés"
-                label="Nombre del café"
-                margin="dense"
-                name="en_nombre06"
-                onChange={handleChange}
-                required
-                value={values.en_nombre06}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item md={2} xs={3}>
-              <CardHeader
-                title="Café 7"
-              />
-            </Grid>
-            <Grid item md={5} xs={5}>
-              <TextField
-                fullWidth
-                helperText="En español"
-                label="Nombre del café"
-                margin="dense"
-                name="nombre07"
-                onChange={handleChange}
-                required
-                value={values.nombre07}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item md={5} xs={4}>
-              <TextField
-                fullWidth
-                helperText="En inglés"
-                label="Nombre del café"
-                margin="dense"
-                name="en_nombre07"
-                onChange={handleChange}
-                required
-                value={values.en_nombre07}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item md={2} xs={3}>
-              <CardHeader
-                title="Café 8"
-              />
-            </Grid>
-            <Grid item md={5} xs={5}>
-              <TextField
-                fullWidth
-                helperText="En español"
-                label="Nombre del café"
-                margin="dense"
-                name="nombre08"
-                onChange={handleChange}
-                required
-                value={values.nombre08}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item md={5} xs={4}>
-              <TextField
-                fullWidth
-                helperText="En inglés"
-                label="Nombre del café"
-                margin="dense"
-                name="en_nombre08"
-                onChange={handleChange}
-                required
-                value={values.en_nombre08}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item md={2} xs={3}>
-              <CardHeader
-                title="Café 9"
-              />
-            </Grid>
-            <Grid item md={5} xs={5}>
-              <TextField
-                fullWidth
-                helperText="En español"
-                label="Nombre del café"
-                margin="dense"
-                name="nombre09"
-                onChange={handleChange}
-                required
-                value={values.nombre09}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item md={5} xs={4}>
-              <TextField
-                fullWidth
-                helperText="En inglés"
-                label="Nombre del café"
-                margin="dense"
-                name="en_nombre09"
-                onChange={handleChange}
-                required
-                value={values.en_nombre09}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item md={2} xs={3}>
-              <CardHeader
-                title="Café 10"
-              />
-            </Grid>
-            <Grid item md={5} xs={5}>
-              <TextField
-                fullWidth
-                helperText="En español"
-                label="Nombre del café"
-                margin="dense"
-                name="nombre10"
-                onChange={handleChange}
-                required
-                value={values.nombre10}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item md={5} xs={4}>
-              <TextField
-                fullWidth
-                helperText="En inglés"
-                label="Nombre del café"
-                margin="dense"
-                name="en_nombre10"
-                onChange={handleChange}
-                required
-                value={values.en_nombre10}
-                variant="outlined"
-              />
-            </Grid>
-          </Grid>
+          
+            {
+              diezItems.map(uno => (
+                <Grid
+                  key={uno}
+                  container
+                  spacing={3}
+                >
+                  <Grid  item md={2} xs={3}>
+                    <CardHeader
+                      title={`Café ${uno}`}
+                    />
+                  </Grid>
+                  <Grid item md={4} xs={5}>
+                    <TextField
+                      fullWidth
+                      helperText={`Nombre del Café #${uno} en español`}
+                      // label="Nombre del café"
+                      margin="dense"
+                      name={`nombre${uno}`}
+                      onChange={handleChange}
+                      required
+                      value={values.[`nombre${uno}`]}
+                      variant="outlined"
+                    />
+                  </Grid>
+                  <Grid item md={4} xs={4}>
+                    <TextField
+                      fullWidth
+                      helperText={`Nombre del Café #${uno} en inglés`}
+                      margin="dense"
+                      name={`en_nombre${uno}`}
+                      onChange={handleChange}
+                      required
+                      value={values.[`en_nombre${uno}`]}
+                      variant="outlined"
+                    />
+                  </Grid>
+                  <Grid item md={2} xs={2}>
+                    <Button
+                      color="primary"
+                      variant="contained"
+                      onClick={() => guardarCategoria(uno, `nombre${uno}`, `en_nombre${uno}`)}
+                      style={{marginTop: '8px'}}
+                    >
+                    Guardar</Button>
+                  </Grid>
+                </Grid>
+
+              ))
+            }
         </CardContent>
         <Divider />
         <CardActions>
-        <Button
-            color="primary"
-            variant="contained"
-            type="submit"
-          >
-          { (editando) ? 'Guardar cambios' : 'Crear' }
-          </Button>
-
-          <Button
-            onClick={() => btnCancelar()}
-            style={{backgroundColor: 'red', color: 'white'}}
-            variant="contained"
-          >Cancelar</Button>
-
-          {
-            editando ? null : (
-              <Button
-                onClick={() => btnVaciar()}
-                color="default"
-                variant="contained"
-                style={{margin: '0 0 0 auto'}}
-              >Vaciar campos</Button>
-            ) 
-          }
-
-          
           {errores ? <Alert severity="error">{errores}</Alert> : null}
         </CardActions>
       </form>
