@@ -33,7 +33,7 @@ const ProductsToolbar = props => {
     >
       <div className={classes.row}>
         <span className={classes.spacer} />
-        <Link to="/agregar-plato">
+        <Link to="/agregar-item">
           <Button
             color="primary"
             variant="contained"

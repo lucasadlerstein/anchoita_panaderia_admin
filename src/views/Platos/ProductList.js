@@ -225,7 +225,7 @@ const Platos = () => {
   }
 
   const editarItem = id => {
-    window.location.href = `/agregar-plato?id=${id}`;
+    window.location.href = `/agregar-item?id=${id}`;
   }
 
   const handleRequestSort = (event, property) => {
