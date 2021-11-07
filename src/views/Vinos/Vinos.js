@@ -329,9 +329,9 @@ const Vinos = () => {
                     ((busqueda === null || busqueda === '') || (
                     (busqueda !== null || busqueda !== '') && (
                       item.nombre.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(busqueda.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase()) ||
-                      item.tipo.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(busqueda.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase()) ||
-                      item.uva.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(busqueda.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase()) ||
-                      item.bodega.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(busqueda.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase()))))) {
+                      item.descripcion.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(busqueda.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase()) ||
+                      item.en_descripcion.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(busqueda.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase()) ||
+                      item.en_nombre.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(busqueda.normalize("NFD").replace(/[\u0300-\u036f]/g, '').toLowerCase()))))) {
 
                   return (
                     <TableRow
@@ -350,7 +350,7 @@ const Vinos = () => {
                         /> */}
                       </TableCell>
                       <TableCell component="th" id={labelId} scope="row" padding="none">{item.nombre}</TableCell>
-                      <TableCell align="right">{item.categoria === 1 ? 'Cafeteria' : 'Otro'}</TableCell>
+                      <TableCell align="right">{item.categoria === 1 ? 'Cafeteria' : item.categoria === 2 ? 'Bebidas' : item.categoria === 3 ? 'Panadería' : item.categoria === 4 ? 'Sandwiches' : item.categoria === 5 ? 'Helados' : ''}</TableCell>
                       {/* <TableCell align="right">{item.categoria2}</TableCell> */}
                       <TableCell align="right">{(item.precio !== 0) ? `$${item.precio}` : ''}</TableCell>
                       <TableCell align="right">{(item.precio2 !== 0) ? `$${item.precio2}` : ''}</TableCell>

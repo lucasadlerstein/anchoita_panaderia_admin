@@ -351,7 +351,7 @@ const Platos = () => {
                         /> */}
                       </TableCell>
                       <TableCell component="th" id={labelId} scope="row" padding="none">{item.nombre}</TableCell>
-                      <TableCell align="right">{item.categoria === 1 ? 'Cafeteria' : 'Otro'}</TableCell>
+                      <TableCell align="right">{item.categoria === 1 ? 'Cafeteria' : item.categoria === 2 ? 'Bebidas' : item.categoria === 3 ? 'Panadería' : item.categoria === 4 ? 'Sandwiches' : item.categoria === 5 ? 'Helados' : ''}</TableCell>
                       {/* <TableCell align="right">{item.categoria2}</TableCell> */}
                       <TableCell align="right">{(item.precio !== 0) ? `$${item.precio}` : ''}</TableCell>
                       <TableCell align="right">{(item.precio2 !== 0) ? `$${item.precio2}` : ''}</TableCell>
