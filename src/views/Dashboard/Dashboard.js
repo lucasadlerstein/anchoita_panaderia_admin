@@ -91,7 +91,7 @@ const Dashboard = () => {
           <Reutilizable
             texto={"COMIDAS OCULTAS"}
             numero={estadisticas.totalComidaOcultos}
-            onClick={() => window.location.href = '/comidas-ocultos'}
+            onClick={() => window.location.href = '/comida-oculta'}
             style={{cursor: 'pointer'}}
           />
         </Grid>
@@ -105,7 +105,7 @@ const Dashboard = () => {
           <Reutilizable
             texto={"BEBIDAS OCULTAS"}
             numero={estadisticas.totalBebidaOcultos}
-            onClick={() => window.location.href = '/bebidas-ocultas'}
+            onClick={() => window.location.href = '/bebida-oculta'}
             style={{cursor: 'pointer'}}
           />
         </Grid>

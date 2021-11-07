@@ -383,10 +383,10 @@ const AccountDetails = props => {
               md={2}
               xs={6}
             >
-              {/* <FormControlLabel
+              <FormControlLabel
                 control={<Checkbox checked={values.stock} onChange={handleChange} name="stock" />}
                 label="Stock"
-              /> */}
+              />
             </Grid>
           </Grid>
           <Divider />
