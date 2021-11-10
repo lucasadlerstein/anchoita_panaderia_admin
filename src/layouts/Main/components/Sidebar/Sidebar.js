@@ -11,6 +11,7 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import VisibilityOffOutlinedIcon from '@material-ui/icons/VisibilityOffOutlined';
 import SettingsIconOutlined from '@material-ui/icons/SettingsOutlined';
+import LocalCafeIcon from '@material-ui/icons/LocalCafe';
 
 import { Profile, SidebarNav } from './components';
 
@@ -69,9 +70,9 @@ const Sidebar = props => {
       icon: <VisibilityOffIcon />
     },
     {
-      title: 'Cambios generales',
-      href: '/cambios-generales',
-      icon: <SettingsIconOutlined />
+      title: 'Categorias café',
+      href: '/categorias-cafe',
+      icon: <LocalCafeIcon />
     }
   ];
 

@@ -2,15 +2,8 @@ import React from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
-import {
-  Card,
-  CardContent,
-  Grid,
-  Typography,
-  Avatar,
-  LinearProgress
-} from '@material-ui/core';
-import LocalBarIcon from '@material-ui/icons/LocalBar';
+import { Card, CardContent, Grid, Typography, Avatar } from '@material-ui/core';
+import LocalCafeIcon from '@material-ui/icons/LocalCafe';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,7 +18,6 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     backgroundColor: theme.palette.primary.main,
-    color: theme.palette.primary.contrastText,
     height: 56,
     width: 56
   },
@@ -33,13 +25,22 @@ const useStyles = makeStyles(theme => ({
     height: 32,
     width: 32
   },
-  progress: {
-    marginTop: theme.spacing(3)
+  difference: {
+    marginTop: theme.spacing(2),
+    display: 'flex',
+    alignItems: 'center'
+  },
+  differenceIcon: {
+    color: theme.palette.error.dark
+  },
+  differenceValue: {
+    color: theme.palette.error.dark,
+    marginRight: theme.spacing(1)
   }
 }));
 
-const TasksProgress = props => {
-  const { eventosTotales, className, ...rest } = props;
+const CategoriasCafe = (props) => {
+  const { texto, numero, className, ...rest } = props;
 
   const classes = useStyles();
 
@@ -60,13 +61,13 @@ const TasksProgress = props => {
               gutterBottom
               variant="body2"
             >
-              CAFÉ y BEBIDAS
+              {texto}
             </Typography>
-            <Typography variant="h3">{eventosTotales}</Typography>
+            <Typography variant="h3">{numero}</Typography>
           </Grid>
           <Grid item>
             <Avatar className={classes.avatar}>
-              <LocalBarIcon className={classes.icon} />
+              <LocalCafeIcon className={classes.icon} />
             </Avatar>
           </Grid>
         </Grid>
@@ -75,8 +76,8 @@ const TasksProgress = props => {
   );
 };
 
-TasksProgress.propTypes = {
+CategoriasCafe.propTypes = {
   className: PropTypes.string
 };
 
-export default TasksProgress;
+export default CategoriasCafe;

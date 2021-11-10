@@ -94,7 +94,7 @@ const Routes = () => {
         component={NuevoVinoView}
         exact
         layout={MainLayout}
-        path="/cambios-generales"
+        path="/categorias-cafe"
       />
       <RouteWithLayout
         component={NuevoCocktailView}

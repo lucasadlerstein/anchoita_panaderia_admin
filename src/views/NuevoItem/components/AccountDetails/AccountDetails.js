@@ -252,7 +252,7 @@ const AccountDetails = props => {
             >
               <TextField
                 fullWidth
-                helperText="¿Como es este item?"
+                helperText="¿Cómo es este item?"
                 label="Descripción"
                 margin="dense"
                 name="descripcion"

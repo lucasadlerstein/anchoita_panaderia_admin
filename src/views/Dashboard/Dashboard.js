@@ -9,7 +9,8 @@ import {
   TasksProgress,
   TotalProfit,
   ComprasDash,
-  Reutilizable
+  Reutilizable,
+  CategoriasCafe
 } from './components';
 
 const useStyles = makeStyles(theme => ({
@@ -30,6 +31,7 @@ const Dashboard = () => {
     const traerDatos = async () => {
       const estadisticasDB = await clienteAxios.get('/general/estadisticas');
       setEstadisticas(estadisticasDB.data);
+      console.log(estadisticasDB)
     }
     traerDatos();
   //eslint-disable-next-line
@@ -106,6 +108,27 @@ const Dashboard = () => {
             texto={"BEBIDAS OCULTAS"}
             numero={estadisticas.totalBebidaOcultos}
             onClick={() => window.location.href = '/bebida-oculta'}
+            style={{cursor: 'pointer'}}
+          />
+        </Grid>
+        </Grid>
+
+        <Grid
+          container
+          spacing={4}
+          style={{marginTop: '20px'}}
+        >
+        <Grid
+          item
+          lg={3}
+          sm={6}
+          xl={3}
+          xs={12}
+        >
+          <CategoriasCafe
+            texto={"CATEGORIAS CAFÉ"}
+            numero={estadisticas.totalCategoriasCafe}
+            onClick={() => window.location.href = '/categorias-cafe'}
             style={{cursor: 'pointer'}}
           />
         </Grid>
