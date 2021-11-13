@@ -38,10 +38,14 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root}
+      // style={{marginLeft: '20%', width: '100%', marginTop: '7.1rem'}}
+      // style={{alignItems: 'center'}}
+    >
       <Grid
         container
         spacing={4}
+        style={{alignItems: 'center', justifyContent: 'center', marginTop: '6rem'}}
       >
         <Grid
           item
@@ -72,7 +76,7 @@ const Dashboard = () => {
         <Grid
           container
           spacing={4}
-          style={{marginTop: '20px'}}
+          style={{marginTop: '20px', alignItems: 'center', justifyContent: 'center'}}
         >
           {/* <Grid
             item
@@ -116,7 +120,7 @@ const Dashboard = () => {
         <Grid
           container
           spacing={4}
-          style={{marginTop: '20px'}}
+          style={{marginTop: '20px', alignItems: 'center', justifyContent: 'center'}}
         >
         <Grid
           item
