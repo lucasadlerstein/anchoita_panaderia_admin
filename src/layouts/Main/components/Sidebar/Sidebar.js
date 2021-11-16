@@ -70,7 +70,7 @@ const Sidebar = props => {
       icon: <VisibilityOffIcon />
     },
     {
-      title: 'Categorias café',
+      title: 'Categorías café',
       href: '/categorias-cafe',
       icon: <LocalCafeIcon />
     }

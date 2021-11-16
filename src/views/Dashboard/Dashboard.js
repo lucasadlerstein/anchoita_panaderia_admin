@@ -120,7 +120,7 @@ const Dashboard = () => {
         <Grid
           container
           spacing={4}
-          style={{marginTop: '20px', alignItems: 'center', justifyContent: 'center'}}
+          style={{marginTop: '20px', alignItems: 'center', justifyContent: 'center', marginBottom: '6rem'}}
         >
         <Grid
           item
